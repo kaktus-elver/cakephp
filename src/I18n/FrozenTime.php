@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Cake\I18n;
 
 use Cake\Chronos\Chronos;
-use DateTimeInterface;
 use DateTimeZone;
 use IntlDateFormatter;
 
@@ -120,26 +119,6 @@ class FrozenTime extends Chronos implements I18nDateTimeInterface
      * @var string
      */
     public const UNIX_TIMESTAMP_FORMAT = 'unixTimestampFormat';
-
-    /**
-     * Create a new immutable time instance.
-     *
-     * @param string|int|\DateTimeInterface|null $time Fixed or relative time
-     * @param \DateTimeZone|string|null $tz The timezone for the instance
-     */
-    public function __construct($time = null, $tz = null)
-    {
-        if ($time instanceof DateTimeInterface) {
-            $tz = $time->getTimezone();
-            $time = $time->format('Y-m-d H:i:s.u');
-        }
-
-        if (is_numeric($time)) {
-            $time = '@' . $time;
-        }
-
-        parent::__construct($time, $tz);
-    }
 
     /**
      * Returns either a relative or a formatted absolute date depending

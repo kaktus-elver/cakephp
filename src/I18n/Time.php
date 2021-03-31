@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Cake\I18n;
 
 use Cake\Chronos\MutableDateTime;
-use DateTimeInterface;
 use DateTimeZone;
 use IntlDateFormatter;
 
@@ -118,25 +117,6 @@ class Time extends MutableDateTime implements I18nDateTimeInterface
      * @var string
      */
     public const UNIX_TIMESTAMP_FORMAT = 'unixTimestampFormat';
-
-    /**
-     * Create a new mutable time instance.
-     *
-     * @param string|int|\DateTimeInterface|null $time Fixed or relative time
-     * @param \DateTimeZone|string|null $tz The timezone for the instance
-     */
-    public function __construct($time = null, $tz = null)
-    {
-        if ($time instanceof DateTimeInterface) {
-            $tz = $time->getTimezone();
-            $time = $time->format('Y-m-d H:i:s.u');
-        }
-
-        if (is_numeric($time)) {
-            $time = '@' . $time;
-        }
-        parent::__construct($time, $tz);
-    }
 
     /**
      * Returns a nicely formatted date string for this object.
